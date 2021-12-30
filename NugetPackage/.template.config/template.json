@@ -5,46 +5,19 @@
         "Common",
         "Code"
     ],
-    "identity": "dotnet.core.micro.service",
-    "name": ".NET Core 6.0 micro-service",
-    "shortName": "microservice",
+    "identity": "netmaximum.nuget.template",
+    "name": "Netmaximum nuget template",
+    "shortName": "nm-nuget",
     "tags": {
         "language": "C#",
         "type": "item"
     },
-    "guids": [
-        "9A19103F-16F7-4668-BE54-9A1E7A4F7556",
-        "CDC16DE6-84F9-4613-9A65-DE98AD6E6267",
-        "479C0443-B3F0-4D95-9E6F-0FD15BA1C924",
-        "6E429B37-AF4C-4C3E-AE4E-850723C321C5",
-        "B8592FDC-FEB3-4CD7-8DDD-B8A9F41C7946"
-    ],
     "symbols": {
         "ProjectName": {
             "type": "parameter",
             "replaces": "PROJECT_NAME",
             "FileRename": "PROJECT_NAME",
             "isRequired": true
-        },
-        "AddHealthChecks": {
-            "type": "parameter",
-            "datatype": "bool",
-            "defaultValue": "false"
-        },
-        "AddSqsPublisher": {
-            "type": "parameter",
-            "datatype": "bool",
-            "defaultValue": "false"
-        },
-        "AddSqsConsumer": {
-            "type": "parameter",
-            "datatype": "bool",
-            "defaultValue": "false"
-        },
-        "AddSerilog": {
-            "type": "parameter",
-            "datatype": "bool",
-            "defaultValue": "false"
         }
     },
     "sources": [
@@ -57,52 +30,6 @@
                 "**/*.user",
                 "**/*.lock.json",
                 ".vs/**"
-            ],
-            "modifiers": [
-                {
-                    "condition": "(!AddHealthChecks)",
-                    "exclude": [
-                        "src/**/HealthChecks/**",
-                        "test/**/Client/HealthCheckClient.cs",
-                        "test/**/Tests/HealthCheckTest.cs"
-                    ]
-                },
-                {
-                    "condition": "(AddHealthChecks && !(AddSqsPublisher || AddSqsConsumer))",
-                    "exclude": "src/**/HealthChecks/SqsHealthCheck.cs"
-                },
-                {
-                    "condition": "(!(AddSqsPublisher && AddSqsConsumer))",
-                    "exclude": [
-                        "src/**/Sqs/**",
-                        "src/**/Services/**",
-                        "src/**/Controllers/ConsumerController.cs",
-                        "src/**/Controllers/PublishController.cs",
-                        "test/**/Controllers/ConsumerControllerTest.cs",
-                        "test/**/Controllers/PublishControllerTest.cs",
-                        "test/**/Client/PublishClient.cs",
-                        "test/**/Tests/PublishTest.cs"
-                    ]
-                },
-                {
-                    "condition": "(AddSqsPublisher)",
-                    "include": [
-                        "src/**/Sqs/**",
-                        "src/**/Controllers/PublishController.cs",
-                        "test/**/Controllers/PublishControllerTest.cs",
-                        "test/**/Client/PublishClient.cs",
-                        "test/**/Tests/PublishTest.cs"
-                    ]
-                },
-                {
-                    "condition": "(AddSqsConsumer)",
-                    "include": [
-                        "src/**/Sqs/**",
-                        "src/**/Services/**",
-                        "src/**/Controllers/ConsumerController.cs",
-                        "test/**/Controllers/ConsumerControllerTest.cs"
-                    ]
-                }
             ]
         }
     ]

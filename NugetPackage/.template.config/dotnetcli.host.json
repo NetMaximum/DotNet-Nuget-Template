@@ -4,22 +4,6 @@
     "ProjectName": {
       "longName": "ProjectName",
       "shortName": "pn"
-    },
-    "AddHealthChecks": {
-      "longName": "AddHealthChecks",
-      "shortName": "ah"
-    },
-    "AddSqsPublisher": {
-      "longName": "AddSqsPublisher",
-      "shortName": "ap"
-    },
-    "AddSqsConsumer": {
-      "longName": "AddSqsConsumer",
-      "shortName": "ac"
-    },
-    "AddSerilog": {
-      "longName": "AddSerilog",
-      "shortName": "al"
     }
   }
 }
