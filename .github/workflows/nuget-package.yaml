@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
       - uses: actions/checkout@v2
       - name: Fetch all history for all tags and branches
         run: git fetch --prune --unshallow
@@ -35,8 +34,11 @@ jobs:
       - name: Register the package feed
         run: dotnet nuget add source --username NetMaximum --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/NetMaximum/index.json"
 
+      - name: Install dependencies
+        run: dotnet restore Pack.csproj
+
       - name: Pack
-        run: dotnet pack Pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
+        run: dotnet pack pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
 
       - name: Create a release
         if: github.ref == 'refs/heads/main'
@@ -63,8 +65,8 @@ jobs:
           name: buildartifacts
           path: ./nupkgs/
 
-    outputs:
-      version: ${{ steps.gitversion.outputs.majorMinorPatch }}
+      outputs:
+        version: ${{ steps.gitversion.outputs.majorMinorPatch }}
 
   pushtonuget:
     name: PushToNuget
