@@ -38,7 +38,7 @@ jobs:
         run: dotnet restore Pack.csproj
 
       - name: Pack
-        run: dotnet pack pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
+        run: dotnet pack Pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
 
       - name: Create a release
         if: github.ref == 'refs/heads/main'
@@ -65,8 +65,8 @@ jobs:
           name: buildartifacts
           path: ./nupkgs/
 
-      outputs:
-        version: ${{ steps.gitversion.outputs.majorMinorPatch }}
+    outputs:
+      version: ${{ steps.gitversion.outputs.majorMinorPatch }}
 
   pushtonuget:
     name: PushToNuget
