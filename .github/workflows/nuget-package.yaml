@@ -36,7 +36,7 @@ jobs:
         run: dotnet nuget add source --username NetMaximum --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/NetMaximum/index.json"
 
       - name: Pack
-        run: dotnet pack pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
+        run: dotnet pack Pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
 
       - name: Create a release
         if: github.ref == 'refs/heads/main'
