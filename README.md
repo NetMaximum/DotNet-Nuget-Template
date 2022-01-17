@@ -1,5 +1,13 @@
 # Net Maximum - Dotnet public nuget template.
 
+Create a new nuget package quickly and efficently with the net maximum template, automatically creates / integrates with:
+
+* Github build
+  * Git Versioning.
+  * Auto release notes from PRs.
+  * Environment created for final nuget push.
+* Integrates with [https://about.codecov.io/](https://about.codecov.io/)
+
 ## Using the template
 
 ```
@@ -29,7 +37,7 @@ To use this feed an auth token needs to be generated, this can be done inside th
 Once you have this token replace it in the command below:
 
 ```
-dotnet nuget add source --username "YOURUSERNAME" --password REPLACEWITHTOKEN --store-password-in-clear-text --name github "https://nuget.pkg.github.com/NetMaximum/index.json"
+dotnet nuget add source --username YOURUSERNAME --password REPLACEWITHTOKEN --store-password-in-clear-text --name github "https://nuget.pkg.github.com/NetMaximum/index.json"
 ```
 
 ## Local Development
