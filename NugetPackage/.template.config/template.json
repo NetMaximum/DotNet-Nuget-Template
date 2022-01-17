@@ -18,6 +18,12 @@
             "replaces": "PROJECT_NAME",
             "FileRename": "PROJECT_NAME",
             "isRequired": true
+        },
+        "RepoName": {
+            "type": "parameter",
+            "replaces": "REPO_NAME",
+            "FileRename": "REPO_NAME",
+            "isRequired": true
         }
     },
     "sources": [

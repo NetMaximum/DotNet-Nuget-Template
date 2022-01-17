@@ -4,6 +4,10 @@
     "ProjectName": {
       "longName": "ProjectName",
       "shortName": "pn"
+    },
+    "RepoName": {
+      "longName": "RepoName",
+      "shortName": "rn"
     }
   }
 }

@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
-        <RepositoryUrl>https://github.com/NetMaximum/PROJECT_NAME</RepositoryUrl>
+        <RepositoryUrl>REPO_NAME</RepositoryUrl>
     </PropertyGroup>
 
 </Project>
