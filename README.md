@@ -6,6 +6,7 @@ Create a new nuget package quickly and efficently with the net maximum template,
   * Git Versioning.
   * Auto release notes from PRs.
   * Environment created for final nuget push.
+* [SourceLink](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink) support with GitHub
 * Integrates with [https://about.codecov.io/](https://about.codecov.io/)
 
 ## Using the template
