@@ -75,10 +75,10 @@ jobs:
           generate_release_notes: true
 
       - name: Tag
-        run: git tag v${needs.build.outputs.version}
+        run: git tag v${{ needs.build.outputs.version }}
 
       - name: Push Tag
-        run: git push origin v${needs.build.outputs.version}
+        run: git push origin v${{ needs.build.outputs.version }}
               
       - name: Push
         run: dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source "nuget.org"
