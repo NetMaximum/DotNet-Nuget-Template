@@ -53,7 +53,7 @@ jobs:
           path: ./nupkgs/
 
     outputs:
-      version: ${{ steps.gitversion.outputs.majorMinorPatch }}
+      version: $GITVERSION_MAJORMINORPATCH
 
   pushtonuget:
     name: PushToNuget
