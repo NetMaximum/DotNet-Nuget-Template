@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Fetch all history for all tags and branches
@@ -38,27 +36,16 @@ jobs:
         run: dotnet restore Pack.csproj
 
       - name: Pack
+        if: github.ref == 'refs/heads/main'
         run: dotnet pack Pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_MAJORMINORPATCH
 
-      - name: Create a release
-        if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v0.1.14
-        with:
-          tag_name: v${{ env.GITVERSION_MAJORMINORPATCH}}
-          generate_release_notes: true
+      # Should push PR builds onto the github feed.
+      - name: Pack
+        if: github.event_name == 'pull_request'
+        run: dotnet pack Pack.csproj --configuration Release --no-restore --verbosity normal --output nupkgs -p:PackageVersion=$GITVERSION_NUGETVERSION
 
       - name: Push
-        # if: github.event_name != 'pull_request'
-        if: github.ref == 'refs/heads/main'
         run: dotnet nuget push nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
-
-      - name: Tag
-        if: github.ref == 'refs/heads/main'
-        run: git tag v${GITVERSION_MAJORMINORPATCH}
-
-      - name: Push Tag
-        if: github.ref == 'refs/heads/main'
-        run: git push origin v${GITVERSION_MAJORMINORPATCH}
 
       - uses: actions/upload-artifact@v2
         with:
@@ -78,7 +65,19 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
         with:
-          # Artifact name
           name: buildartifacts
+
+      - name: Create a release
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          tag_name: v${{ needs.build.outputs.version }}
+          generate_release_notes: true
+
+      - name: Tag
+        run: git tag v${needs.build.outputs.version}
+
+      - name: Push Tag
+        run: git push origin v${needs.build.outputs.version}
+              
       - name: Push
         run: dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source "nuget.org"
