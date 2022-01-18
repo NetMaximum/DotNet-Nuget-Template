@@ -62,10 +62,10 @@ jobs:
           name: buildartifacts
 
       - name: Create a release
-          uses: softprops/action-gh-release@v0.1.14
-          with:
-            tag_name: v${{ needs.build.outputs.version }}
-            generate_release_notes: true
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          tag_name: v${{ needs.build.outputs.version }}
+          generate_release_notes: true
 
       - name: Tag
         run: git tag v${needs.build.outputs.version}
